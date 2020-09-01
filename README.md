@@ -4,6 +4,17 @@ jQuery plugin for showing a calendar yearview with blocks (github contributions 
 Code adopted from https://github.com/bachvtuan/Github-Contribution-Graph and expanded.
 
 Allows for up to 4 items per day that will be shown on the calendar (square, triangle, stripes and cubes, respectively).
+Expects a JSON as data input in the form of:
+
+    {
+        "2020-08-01": {
+            "items": ["banana", "apple"]
+        }, 
+        "2020-09-01": {
+            "items": ["orange"]
+        }
+    }
+
 Settings are self-explanatory:
 
     $('#cal_chart_1').calendar_yearview_blocks({
@@ -22,3 +33,5 @@ Settings are self-explanatory:
     });
 
 ![Demo screenshot](https://i.ibb.co/Dgssfc6/calendar-yearview-blocks.jpg "Demo screenshot")
+
+MIT license
