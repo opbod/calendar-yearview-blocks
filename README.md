@@ -32,6 +32,6 @@ Settings are self-explanatory:
         }
     });
 
-![Demo screenshot](https://i.ibb.co/Dgssfc6/calendar-yearview-blocks.jpg "Demo screenshot")
+![Demo screenshot](https://i.ibb.co/SNPVw2q/calendar-yearview-blocks.jpg "Demo screenshot")
 
 MIT license
