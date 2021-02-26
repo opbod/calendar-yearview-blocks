@@ -79,8 +79,9 @@
                     // Put a box around today's date
                     if (settings.stylize_today) {
                         var match_today = current_date.getTime() === start_date.getTime() ? '" style="stroke:black;stroke-width:2;opacity:0.5"' : '';
-                    }
-                    //var match_today = "";
+                    } else {
+                    	var match_today = "";
+					}
 
                     var items = [];
                     if (obj_timestamp[data_date]) {
