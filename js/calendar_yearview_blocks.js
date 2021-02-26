@@ -31,9 +31,10 @@
 
             var wrap_chart = _this;
 
+            var end_date = new Date(settings.final_date);
             var current_date = new Date();
             var start_date = new Date();
-            start_date.setMonth(start_date.getMonth() - 12);
+            start_date.setMonth(end_date.getMonth() - 12);
 
             var start_weekday = settings.start_monday === true?1:0;
             for (var i = 0; i < 7; i++) {
@@ -60,7 +61,7 @@
 
                 for (var j = 0; j < 7; j++) { // For each weekday, generate a row
 
-                    if (start_date > current_date) {
+                    if (start_date > end_date) {
                         // Break the loop when today's date is found
                         break;
                     }
@@ -76,10 +77,10 @@
                     }
 
                     // Put a box around today's date
-                    //if (settings.stylize_today) {
-                    //    var match_today = current_date.getTime() === start_date.getTime() ? '" style="stroke:black;stroke-width:2;opacity:0.5"' : '';
-                    //}
-                    var match_today = "";
+                    if (settings.stylize_today) {
+                        var match_today = current_date.getTime() === start_date.getTime() ? '" style="stroke:black;stroke-width:2;opacity:0.5"' : '';
+                    }
+                    //var match_today = "";
 
                     var items = [];
                     if (obj_timestamp[data_date]) {
@@ -219,6 +220,7 @@
             start_monday: true,
             always_show_tooltip: false,
             stylize_today: false,
+            final_date: new Date().toISOString().slice(0, 10),
             data: []
         }, options);
 
