@@ -80,13 +80,22 @@
                     if (settings.stylize_today) {
                         var match_today = current_date.getTime() === start_date.getTime() ? '" style="stroke:black;stroke-width:2;opacity:0.5"' : '';
                     } else {
-                    	var match_today = "";
-					}
+                        var match_today = "";
+                    }
 
                     var items = [];
+                    var legend = '', items_str = '';
                     if (obj_timestamp[data_date]) {
                         if (obj_timestamp[data_date].items) {
                             items = obj_timestamp[data_date].items;
+							items_str = items.join(", ")
+							items_str = items_str.replaceAll('&', '&amp;');
+							items_str = items_str.replaceAll('"', '&quot;');
+                        }
+                        if (obj_timestamp[data_date].legend) {
+                            legend = obj_timestamp[data_date].legend;
+							legend = legend.replaceAll('&', '&amp;');
+							legend = legend.replaceAll('"', '&quot;');
                         }
                     }
 
@@ -94,18 +103,18 @@
                     var color = settings.colors[item_name]?settings.colors[item_name]:settings.colors['default'];
 
                     // Fill a square for the 1st item
-                    item_html += '<rect class="day" width="11" height="11" y="' + y + '" fill="' + color + match_today + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
+                    item_html += '<rect class="day" width="11" height="11" y="' + y + '" fill="' + color + match_today + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
                     if (items.length === 2) { // Fill a trangle for the 2nd
                         var item_name_1 = items[1]?items[1]:false;
                         var color_1 = settings.colors[item_name_1]?settings.colors[item_name_1]:settings.colors['default'];
-                        item_html += '<polygon points="' + 0 + ',' + (y+11) + ' ' + 0 + ',' + y + ' ' + 11 + ',' + y + '" fill="' + color_1 + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
+                        item_html += '<polygon points="' + 0 + ',' + (y+11) + ' ' + 0 + ',' + y + ' ' + 11 + ',' + y + '" fill="' + color_1 + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
                     } else if (items.length === 3) { // Fill 2 rectangles for 2nd and 3rd
                         var item_name_1 = items[1]?items[1]:false;
                         var color_1 = settings.colors[item_name_1]?settings.colors[item_name_1]:settings.colors['default'];
                         var item_name_2 = items[2]?items[2]:false;
                         var color_2 = settings.colors[item_name_2]?settings.colors[item_name_2]:settings.colors['default'];
-                        item_html += '<polygon points="' + 0 + ',' + (y+8) + ' ' + 0 + ',' + y + ' ' + 11 + ',' + y + ' ' + 11 + ',' + (y+8) + '" fill="' + color_1 + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
-                        item_html += '<polygon points="' + 0 + ',' + (y+4) + ' ' + 0 + ',' + y + ' ' + 11 + ',' + y + ' ' + 11 + ',' + (y+4) + '" fill="' + color_2 + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
+                        item_html += '<polygon points="' + 0 + ',' + (y+8) + ' ' + 0 + ',' + y + ' ' + 11 + ',' + y + ' ' + 11 + ',' + (y+8) + '" fill="' + color_1 + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
+                        item_html += '<polygon points="' + 0 + ',' + (y+4) + ' ' + 0 + ',' + y + ' ' + 11 + ',' + y + ' ' + 11 + ',' + (y+4) + '" fill="' + color_2 + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
                     } else if (items.length === 4) { // Fill 3 cubes for 2nd, 3rd and 4th
                         var item_name_1 = items[1]?items[1]:false;
                         var color_1 = settings.colors[item_name_1]?settings.colors[item_name_1]:settings.colors['default'];
@@ -113,9 +122,9 @@
                         var color_2 = settings.colors[item_name_2]?settings.colors[item_name_2]:settings.colors['default'];
                         var item_name_3 = items[3]?items[3]:false;
                         var color_3 = settings.colors[item_name_3]?settings.colors[item_name_3]:settings.colors['default'];
-                        item_html += '<polygon points="' + 0 + ',' + (y+11) + ' ' + 0 + ',' + (y+6) + ' ' + 6 + ',' + (y+6) + ' ' + 6 + ',' + (y+11) + '" fill="' + color_1 + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
-                        item_html += '<polygon points="' + 0 + ',' + (y+6) + ' ' + 0 + ',' + y + ' ' + 6 + ',' + y + ' ' + 6 + ',' + (y+6) + '" fill="' + color_2 + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
-                        item_html += '<polygon points="' + 6 + ',' + (y+6) + ' ' + 6 + ',' + y + ' ' + 11 + ',' + y + ' ' + 11 + ',' + (y+6) + '" fill="' + color_3 + '" data-items="' + items.join(", ") + '" data-date="' + data_date + '"/>';
+                        item_html += '<polygon points="' + 0 + ',' + (y+11) + ' ' + 0 + ',' + (y+6) + ' ' + 6 + ',' + (y+6) + ' ' + 6 + ',' + (y+11) + '" fill="' + color_1 + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
+                        item_html += '<polygon points="' + 0 + ',' + (y+6) + ' ' + 0 + ',' + y + ' ' + 6 + ',' + y + ' ' + 6 + ',' + (y+6) + '" fill="' + color_2 + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
+                        item_html += '<polygon points="' + 6 + ',' + (y+6) + ' ' + 6 + ',' + y + ' ' + 11 + ',' + y + ' ' + 11 + ',' + (y+6) + '" fill="' + color_3 + '" data-items="' + items_str + '" data-legend="' + legend + '" data-date="' + data_date + '"/>';
                     }
 
                     // Move on to the next day
@@ -186,9 +195,10 @@
 
             var target_offset = $(evt.target).offset();
             var items = $(evt.target).attr('data-items');
+            var legend = $(evt.target).attr('data-legend');
             var date = $(evt.target).attr('data-date');
 
-            var text = "{0}: <br />{1}".formatString(date, items);
+            var text = settings.tooltip_style === 'default' ? "{0}: <br />{1}".formatString(date, legend ? legend : items) : (legend ? legend : items);
 
             // Depending on settings, only show a tooltip when there's something to be shown
             if (items.length >= 1 ||  settings.always_show_tooltip === true) {
@@ -222,6 +232,7 @@
             always_show_tooltip: false,
             stylize_today: false,
             final_date: new Date().toISOString().slice(0, 10),
+            tooltip_style: 'default', // or 'custom'
             data: []
         }, options);
 
